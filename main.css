@@ -1,0 +1,52 @@
+body {
+color: #000000;
+background: #ffffff;
+font-family: Helvetica, Arial, sans-serif;
+font-size: 12pt;
+padding: 0px;
+margin: 0px;
+}
+
+div.pageheader {
+color: #ffffff;
+background: #3c2d84;
+font-size: 200%;
+font-family: Helvetica, Arial, sans-serif;
+
+width: 100%;
+padding: 0.5em;
+border-bottom: 1px black solid;
+}
+
+h1 {
+color: #3016b0;
+font-size: 130%;
+
+margin: 1.0em;
+}
+
+a:link {
+color: #624ad8;
+}
+
+a:visited {
+color: #190773;
+}
+
+a:hover {
+color: #8170d8;
+}
+
+p {
+margin: 0.0em 2.0em 0.0em 2.0em;
+}
+
+div.teaserimage {
+float: right;
+margin: 1.3em 1.0em 1.0em 1.0em;
+border: 1px black solid;
+}
+
+div.resourcetable {
+margin: 0.0em 2.0em 0.0em 2.0em;
+}
