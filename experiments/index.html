@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Cloth Silhouette Experiment</title>
+</head>
+<script>
+
+// var url_list = [ 
+// "https://www.youtube.com/embed/bDOgoo5Ne5c",
+// "https://www.youtube.com/embed/rSQV67LNPSE",
+// "https://www.youtube.com/embed/YduNeU4Si7M",
+// "https://www.youtube.com/embed/hqka1uoDunU",
+// "https://www.youtube.com/embed/6uUG3UCZzF4",
+// "https://www.youtube.com/embed/mz14svB5wsk",
+// "https://www.youtube.com/embed/hdfcYIxzzFc",
+// "https://www.youtube.com/embed/6e283SktiPo",
+// "https://www.youtube.com/embed/LhQBUu-eW_Y",
+// "https://www.youtube.com/embed/1UXuK0KtVyk",
+// "https://www.youtube.com/embed/_OWt8G2M1AE",
+// "https://www.youtube.com/embed/QIMo0jFbfQs",
+// "https://www.youtube.com/embed/f1PDzTHSSV4",
+// "https://www.youtube.com/embed/GmsajgnQ6pc",
+// "https://www.youtube.com/embed/9co3JzUWZ_w",
+// "https://www.youtube.com/embed/1RZaTFuVKzg",
+// "https://www.youtube.com/embed/La2Qvn65aeY",
+// "https://www.youtube.com/embed/bTTjI2Glaj8",
+// "https://www.youtube.com/embed/SzC4jrM__Do",
+// "https://www.youtube.com/embed/xGSXXmXNKA8",
+// "https://www.youtube.com/embed/b1mQHftue1c",
+// "https://www.youtube.com/embed/aSSc3J2Pj_c",
+// "https://www.youtube.com/embed/JhepFpeIRHQ",
+// "https://www.youtube.com/embed/EcHyoJ7IoZs",
+// "https://www.youtube.com/embed/gcomOLOdQVQ"];
+url_list = [ 
+"https://www.youtube.com/embed/uKGY0cJik0s",
+"https://www.youtube.com/embed/vbm9nv5DP_w",
+"https://www.youtube.com/embed/qtELKlLbL1o",
+"https://www.youtube.com/embed/7MK4Q9350Us",
+"https://www.youtube.com/embed/qu2eS_QTOOs",
+"https://www.youtube.com/embed/KgHqbujKRHw",
+"https://www.youtube.com/embed/Gg7ZcdZFMmM",
+"https://www.youtube.com/embed/DTrPSAKZwYI",
+"https://www.youtube.com/embed/gLWpIB9LQg8",
+"https://www.youtube.com/embed/MRI9Ow7Ad4o",
+"https://www.youtube.com/embed/dolrqdQ_2sw",
+"https://www.youtube.com/embed/8aBTo_Cix_Y",
+"https://www.youtube.com/embed/uXtNeeFQeEQ",
+"https://www.youtube.com/embed/PVPSL4D2AKw",
+"https://www.youtube.com/embed/jqjoLEpyfVc",
+"https://www.youtube.com/embed/Mv2OBmrTaJs",
+"https://www.youtube.com/embed/Pdh-YNvjyQk",
+"https://www.youtube.com/embed/qzv4JaPid6E",
+"https://www.youtube.com/embed/hmjKoINEPKM",
+"https://www.youtube.com/embed/9feB7TOrU0I",
+"https://www.youtube.com/embed/kowzP3uC7SE",
+"https://www.youtube.com/embed/_NFMArvtT98",
+"https://www.youtube.com/embed/9MAbXue1JgQ",
+"https://www.youtube.com/embed/0jIHWtsviS0",
+"https://www.youtube.com/embed/Q56cImjIn-Q"];
+url_list = shuffle(url_list);
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+// get all unique combination pairs
+var url_combos = [];
+for (var i = 0; i < url_list.length; i++) {
+    for (var j = i+1; j < url_list.length; j++) {
+        var pair = [url_list[i], url_list[j]];
+        url_combos.push(pair);
+    }
+}
+url_combos = shuffle(url_combos);
+
+var gi = 0;
+function clickHandler() {
+    if (gi >= url_combos.length) {
+        alert("No more pairs! Thanks!");
+        return;
+    }
+
+    var pair = url_combos[gi];
+    var leftIndex = Math.round(Math.random());
+    var rightIndex = (leftIndex + 1)%2;
+
+    var leftVideo = document.getElementsByClassName("leftvideo")[0];
+    var leftClone = leftVideo.cloneNode(true);
+    leftClone.setAttribute('src',pair[leftIndex]);
+    leftVideo.parentNode.replaceChild(leftClone,leftVideo);
+
+    var rightVideo = document.getElementsByClassName("rightvideo")[0];
+    var rightClone = rightVideo.cloneNode(true);
+    rightClone.setAttribute('src',pair[rightIndex]);
+    rightVideo.parentNode.replaceChild(rightClone,rightVideo);
+
+    console.log("CLICKINGness?!");
+    gi++;
+}
+
+</script>
+<body>
+<!-- Bootstrap v3.0.3 -->
+<div>
+<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+<section class="container" id="TaggingOfAnImage" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
+<div class="row col-xs-12 col-md-12"><!-- Instructions -->
+<div class="panel panel-primary">
+<div class="panel-heading"><strong>Instructions</strong></div>
+
+<div class="panel-body">
+<p>We present you with a silhouette of a hanging cloth being blown around by wind. The piece of cloth might be denim, silk, cotton, leather, etc. You must play each video (left and right), and choose which cloth material is more stiff based on its silhouette. Note: a silhouette is similar to an outline or a shadow.</p>
+
+<ul>
+	<li>A cloth with low stiffness has more wrinkles/bending.</li>
+	<li>A cloth with high stiffness is more resistant to bending/folding.</li>
+	<li>An example of a cloth with low stiffness is silk.</li>
+	<li>An example of a cloth with high stiffness is leather.</li>
+	<li>If the left cloth is more stiff, type &quot;Left&quot;; otherwise, type &quot;Right&quot;.</li>
+	<li>If the cloth stiffness is the same for both videos, type &quot;Same&quot;.</li>
+	<li>UPPERCASE and lowercase letters matter when typing.</li>
+</ul>
+</div>
+</div>
+<!-- End Instructions -->
+
+<fieldset>
+<div><embed alt="video_urlA" class="leftvideo" src="https://www.youtube.com/embed/8aBTo_Cix_Y"></embed></div>
+
+<div class="tagfields">
+<div class="form-group"><label>Stiffer Cloth:</label> <input class="form-control" name="tag1" size="30" type="text" /></div>
+</div>
+
+<div><embed alt="video_urlB" class="rightvideo" src="https://www.youtube.com/embed/uKGY0cJik0s"></embed></div>
+</fieldset>
+</div>
+</section>
+<div class="nextButtonDiv">
+    <input type="button" value="Next" onclick="clickHandler()" class="nextButton"/>
+</div>
+</div>
+<!-- close container -->
+<style type="text/css">.leftvideo {
+    display:block;
+    float: left;
+    position: relative;
+    border:1px solid #fbfbfb;
+    margin:0px 15px 15px 0px;
+    height:200px;
+    width:auto;
+}
+.rightvideo {
+    display:block;
+    float: right;
+    position: relative;
+    border:1px solid #fbfbfb;
+    margin:0px 15px 15px 0px;
+    height:200px;
+    width:auto;
+}
+.tagfields {
+    display:block;
+    float:left;
+}
+.nextButtonDiv {
+    text-align: center;
+}
+.nextButton {
+}
+</style>
+</body>
+</html>
