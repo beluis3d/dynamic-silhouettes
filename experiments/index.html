@@ -131,13 +131,14 @@ function saveHandler() {
         var a_id = document.getElementsByClassName("form-control2")[0].value;
         var a_guess = document.getElementsByClassName("form-control")[0].value;
 
-        alert("my: " + leftUrl + ";;;" + rightUrl + ";;;" + a_id + ";;;" + a_guess);
+        //alert("my: " + leftUrl + ";;;" + rightUrl + ";;;" + a_id + ";;;" + a_guess);
+        var retObj = {"leftUrl":leftUrl, "rightUrl":rightUrl, "experimentId":a_id, "trialGuess":a_guess};
 
-        //var Result = Parse.Object.extend("Result");
-        //var aResult = new Result();
-        //aResult.save({foop: "barn", }).then(function(object) {
-        //    alert("Save Successful!");
-        //});
+        var Result = Parse.Object.extend("Result");
+        var aResult = new Result();
+        aResult.save(retObj).then(function(object) {
+           alert("Save Successful!");
+        });
     }
 }
 
