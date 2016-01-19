@@ -8,12 +8,6 @@
 
 Parse.initialize("UmgdudTbuR6brrdLQUU4K97U5FRRVrNclwY0TSUt", "d6jHnMYSjGzK2s4zhgb3YG2tD7vcL1kGsODSZiV7");
 
-  var TestFlop = Parse.Object.extend("TestFlop");
-  var testFlop = new TestFlop();
-  testFlop.save({foop: "barn"}).then(function(object) {
-   alert("yay! it worked");
-  });
-
 
 
 // var url_list = [ 
@@ -99,16 +93,19 @@ for (var i = 0; i < url_list.length; i++) {
 }
 url_combos = shuffle(url_combos);
 
-var gi = 0;
-function clickHandler() {
+var gi = -1;
+var leftIndex;
+var rightIndex;
+function nextHandler() {
+    gi++;
     if (gi >= url_combos.length) {
         alert("No more pairs! Thanks!");
         return;
     }
 
     var pair = url_combos[gi];
-    var leftIndex = Math.round(Math.random());
-    var rightIndex = (leftIndex + 1)%2;
+    leftIndex = Math.round(Math.random());
+    rightIndex = (leftIndex + 1)%2;
 
     var leftVideo = document.getElementsByClassName("leftvideo")[0];
     var leftClone = leftVideo.cloneNode(true);
@@ -121,13 +118,34 @@ function clickHandler() {
     rightVideo.parentNode.replaceChild(rightClone,rightVideo);
 
     console.log("CLICKINGness?!");
-    gi++;
+}
+
+function saveHandler() {
+
+    if (gi >= 0) {
+
+        var pair = url_combos[gi];
+        var leftUrl = pair[leftIndex];
+        var rightUrl = pair[rightIndex];
+
+        var a_id = document.getElementsByClassName("form-control2")[0].value;
+        var a_guess = document.getElementsByClassName("form-control")[0].value;
+
+        alert("my: " + leftUrl + ";;;" + rightUrl + ";;;" + a_id + ";;;" + a_guess);
+
+        //var Result = Parse.Object.extend("Result");
+        //var aResult = new Result();
+        //aResult.save({foop: "barn", }).then(function(object) {
+        //    alert("Save Successful!");
+        //});
+    }
 }
 
 </script>
 <body>
 <!-- Bootstrap v3.0.3 -->
 <div>
+<div class="form-group2"><label>ID:</label> <input class="form-control2" name="tag12" size="30" type="text" /></div>
 <link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
 <section class="container" id="TaggingOfAnImage" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
 <div class="row col-xs-12 col-md-12"><!-- Instructions -->
@@ -162,7 +180,8 @@ function clickHandler() {
 </div>
 </section>
 <div class="nextButtonDiv">
-    <input type="button" value="Next" onclick="clickHandler()" class="nextButton"/>
+    <input type="button" value="Save" onclick="saveHandler()" class="saveButton"/>
+    <input type="button" value="Next" onclick="nextHandler()" class="nextButton"/>
 </div>
 </div>
 <!-- close container -->
